@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\lang\TTT.English\TTT.English.csproj" />
+      <ProjectReference Include="..\..\public\TTT.Formatting\TTT.Formatting.csproj" />
+      <ProjectReference Include="..\..\public\TTT.Public\TTT.Public.csproj" />
+    </ItemGroup>
+
+</Project>
