@@ -30,6 +30,8 @@ public class WinConditionListener(IRoleProvider roleProvider)
       alivePlayers.Select(roleProvider.GetRole)) {
       roleCounts[role] = roleCounts.GetValueOrDefault(role) + 1;
     }
+    
+    Server.PrintToChatAll($"T:{roleCounts[RoleType.TRAITOR]} | T:{roleCounts[RoleType.INNOCENT]} | T:{roleCounts[RoleType.DETECTIVE]}");
 
     foreach (var role in Enum.GetValues<RoleType>()) {
       var roleImpl = roleProvider.Get(role);
