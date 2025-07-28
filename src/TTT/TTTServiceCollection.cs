@@ -6,6 +6,7 @@ using TTT.English.Roles;
 using TTT.Formatting.Views;
 using TTT.Formatting.Views.Logs;
 using TTT.Formatting.Views.Roles;
+using TTT.Generic;
 using TTT.Logs;
 using TTT.Roles;
 
@@ -22,6 +23,7 @@ public class TTTServiceCollection : IPluginServiceCollection<TTT>
         serviceCollection.AddSingleton<ILogLocale, LogLocale>();
         serviceCollection.AddSingleton<IRoleLocale, RoleLocale>();
 
+        serviceCollection.AddTTTGeneric();
         serviceCollection.AddTTTLogs();
         serviceCollection.AddTTTRoles();
     }

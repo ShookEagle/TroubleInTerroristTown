@@ -57,6 +57,7 @@
       <ProjectReference Include="..\..\mod\TTT.Roles\TTT.Roles.csproj" />
       <ProjectReference Include="..\..\public\TTT.Formatting\TTT.Formatting.csproj" />
       <ProjectReference Include="..\..\public\TTT.Public\TTT.Public.csproj" />
+      <ProjectReference Include="..\TTT.Generic\TTT.Generic.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -67,7 +68,6 @@
     </ItemGroup>
 
     <Target Name="ZipOutputPath" AfterTargets="Publish">
-        <Message Text="!!!!!!!! Zipping plugin to $(PublishBaseDirectory)\TTT.zip" Importance="high" />
         <ZipDirectory Overwrite="true" SourceDirectory="$(PublishDir)\" DestinationFile="$(PublishBaseDirectory)\TTT.zip"/>
     </Target>
 
