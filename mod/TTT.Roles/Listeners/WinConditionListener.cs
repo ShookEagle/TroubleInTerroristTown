@@ -1,6 +1,9 @@
+using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
+using CounterStrikeSharp.API.Modules.Entities.Constants;
 using TTT.Public.Behaviors;
+using TTT.Public.Extensions;
 using TTT.Public.Mod.Roles;
 using TTT.Public.Mod.Roles.Enum;
 using TTT.Public.Utils;
@@ -36,5 +39,10 @@ public class WinConditionListener(IRoleProvider roleProvider)
     }
   }
 
-  private void endRoundWithWinner(RoleType role) {  }
+  private void endRoundWithWinner(RoleType role) {
+    ServerExtensions.GetGameRules()?.TerminateRound(0.1f, RoundEndReason.RoundDraw);
+    //TODO: WIN GRAPHIC
+    //TODO: LOCALIZE
+    Server.PrintToChatAll($"{roleProvider.Get(role).Type.ToString()}s Wins");
+  }
 }
