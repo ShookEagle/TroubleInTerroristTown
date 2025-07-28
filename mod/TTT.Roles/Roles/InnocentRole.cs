@@ -38,8 +38,7 @@ public class InnocentRole : BaseRole {
 
   public override bool WinCondition(int totalAlive,
     Dictionary<RoleType, int> roleCounts) {
-    // Innocents win when no traitors are left
-    return !roleCounts.TryGetValue(RoleType.TRAITOR, out var traitors)
-      || traitors == 0;
+    roleCounts.TryGetValue(RoleType.TRAITOR, out var traitors);
+    return traitors == 0;
   }
 }

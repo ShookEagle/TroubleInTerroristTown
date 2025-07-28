@@ -40,7 +40,7 @@ public class WinConditionListener(IRoleProvider roleProvider)
   }
 
   private void endRoundWithWinner(RoleType role) {
-    ServerExtensions.GetGameRules()?.TerminateRound(0.1f, RoundEndReason.RoundDraw);
+    ServerExtensions.GetGameRules()?.TerminateRound(5f, RoundEndReason.RoundDraw);
     //TODO: WIN GRAPHIC
     //TODO: LOCALIZE
     Server.PrintToChatAll($"{roleProvider.Get(role).Type.ToString()}s Wins");
