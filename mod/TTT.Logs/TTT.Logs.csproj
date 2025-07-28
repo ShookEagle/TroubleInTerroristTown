@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\public\TTT.Formatting\TTT.Formatting.csproj" />
+      <ProjectReference Include="..\TTT.Roles\TTT.Roles.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 using CounterStrikeSharp.API.Core;
+using TTT.Public.Mod.Roles.Enum;
 
 namespace TTT.Public.Mod.Roles;
 
@@ -6,6 +7,8 @@ public abstract class BaseRole {
   public abstract RoleType Type { get; }
   public abstract string OnScreenGraphic { get; }
   public virtual string OverheadIcon => string.Empty;
+  
+  
 
   /// <summary>
   /// How many players per 1 of this role (e.g. 4 means 1 per 4 players).

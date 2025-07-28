@@ -6,6 +6,7 @@ using TTT.English.Roles;
 using TTT.Formatting.Extensions;
 using TTT.Formatting.Views.Roles;
 using TTT.Public.Mod.Roles;
+using TTT.Public.Mod.Roles.Enum;
 using TTT.Validator;
 
 namespace TTT.Roles.Roles;

@@ -1,4 +1,5 @@
 using TTT.Public.Mod.Roles;
+using TTT.Public.Mod.Roles.Enum;
 
 namespace TTT.Roles;
 

@@ -3,6 +3,7 @@ using CounterStrikeSharp.API.Core.Attributes.Registration;
 using TTT.Public.Behaviors;
 using TTT.Public.Generic;
 using TTT.Public.Mod.Roles;
+using TTT.Public.Mod.Roles.Enum;
 using TTT.Public.Utils;
 
 namespace TTT.Roles.Listeners;
