@@ -6,4 +6,13 @@ public enum RoleType {
   TRAITOR
 }
 
-public static class SDTypeExtensions {
+public static class RoleTypeExtensions {
+  public static string ToShortHand(this RoleType type) {
+    return type switch {
+      RoleType.INNOCENT  => "I",
+      RoleType.DETECTIVE => "D",
+      RoleType.TRAITOR   => "T",
+      _                  => string.Empty
+    };
+  }
+}
