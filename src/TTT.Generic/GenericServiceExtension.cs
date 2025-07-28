@@ -16,9 +16,6 @@ public static class GenericServiceExtension {
     serviceCollection.AddPluginBehavior<RoundStateTracker>();
 
     serviceCollection.AddTransient<IPlayerStateFactory, PlayerStateFactory>();
-    
-    serviceCollection.AddSingleton<IPlayerState<RoleState>>(provider =>
-      provider.GetRequiredService<IPlayerStateFactory>().Round<RoleState>());
 
     serviceCollection.AddPluginBehavior<ICoroutines, CoroutineManager>();
   }

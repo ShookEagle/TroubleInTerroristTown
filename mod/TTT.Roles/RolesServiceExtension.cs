@@ -7,7 +7,7 @@ namespace TTT.Roles;
 
 public static class RolesServiceExtension {
   public static void AddTTTRoles(this IServiceCollection serviceCollection) {
-    serviceCollection.AddPluginBehavior<IRoleFactory, RoleFactory>();
+    serviceCollection.AddPluginBehavior<IRoleProvider, RoleProvider>();
     serviceCollection.AddPluginBehavior<RoleAssignmentListener>();
   }
 }

@@ -8,12 +8,8 @@ using TTT.Public.Utils;
 
 namespace TTT.Roles.Listeners;
 
-public class RoleAssignmentListener(IRoleFactory roleFactory,
-  IPlayerStateFactory playerStateFactory, ICoroutines coroutines)
-  : IPluginBehavior {
-  private readonly IPlayerState<RoleState> roleState =
-    playerStateFactory.Round<RoleState>();
-
+public class RoleAssignmentListener(IRoleProvider roleProvider, 
+  ICoroutines coroutines) : IPluginBehavior {
   [GameEventHandler]
   public HookResult OnRoundStart(EventRoundStart @event, GameEventInfo info) {
     coroutines.Round(assignRoles);
@@ -27,7 +23,7 @@ public class RoleAssignmentListener(IRoleFactory roleFactory,
 
     var totalPlayers = players.Count;
     var allRoles = Enum.GetValues<RoleType>()
-     .Select(rt => roleFactory.Get(rt))
+     .Select(rt => roleProvider.Get(rt))
      .Where(r => r.PlayerRatio is not -1)
      .ToList();
 
@@ -39,15 +35,15 @@ public class RoleAssignmentListener(IRoleFactory roleFactory,
       var count    = Math.Min(ratioCount, maxCount);
 
       foreach (var player in shuffled.Except(assigned).Take(count)) {
-        roleState.Get(player).Type = role.Type;
+        roleProvider.SetRole(player, role.Type);
         role.OnAssigned(player);
         assigned.Add(player);
       }
     }
     
-    var defaultRole = roleFactory.Get(RoleType.INNOCENT);
+    var defaultRole = roleProvider.Get(RoleType.INNOCENT);
     foreach (var player in shuffled.Except(assigned)) {
-      roleState.Get(player).Type = defaultRole.Type;
+      roleProvider.SetRole(player, defaultRole.Type);
       defaultRole.OnAssigned(player);
       assigned.Add(player);
     }

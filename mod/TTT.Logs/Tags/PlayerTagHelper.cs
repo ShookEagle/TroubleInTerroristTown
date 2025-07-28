@@ -2,22 +2,20 @@ using CounterStrikeSharp.API.Core;
 using TTT.Formatting.Core;
 using TTT.Formatting.Objects;
 using TTT.Formatting.Views.Logs;
-using TTT.Public.Generic;
+using TTT.Public.Mod.Roles;
+using Microsoft.Extensions.DependencyInjection;
 using TTT.Public.Mod.Roles.Enum;
-using TTT.Roles;
 
 namespace TTT.Logs.Tags;
 
-public class PlayerTagHelper(IPlayerStateFactory playerStateFactory) 
-  : IRichPlayerTag {
-
-  private readonly IPlayerState<RoleState> roleState =
-    playerStateFactory.Round<RoleState>();
+public class PlayerTagHelper(IServiceProvider provider) : IRichPlayerTag {
+  private readonly Lazy<IRoleProvider?> roleProvider =
+    new(provider.GetService<IRoleProvider>);
   //  Lazy-load dependencies to avoid loops, since we are a lower-level class.
 
   public FormatObject Rich(CCSPlayerController player) {
-    var roleType = roleState.Get(player).Type;
-
+    if (roleProvider.Value == null) return new StringFormatObject("()");
+    var roleType = roleProvider.Value.GetRole(player);
     return new StringFormatObject($"({roleType.ToShortHand()})");
   }
 
