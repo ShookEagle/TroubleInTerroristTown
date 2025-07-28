@@ -1,7 +1,6 @@
 using CounterStrikeSharp.API.Core;
-using TTT.Public.Mod.Roles;
 
-namespace TTT.Roles.Roles;
+namespace TTT.Public.Mod.Roles;
 
 public abstract class BaseRole {
   public abstract RoleType Type { get; }

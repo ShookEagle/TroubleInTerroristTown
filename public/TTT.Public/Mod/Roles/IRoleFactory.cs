@@ -1,5 +1,3 @@
-using TTT.Roles.Roles;
-
 namespace TTT.Public.Mod.Roles;
 
 public interface IRoleFactory {
