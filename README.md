@@ -11,7 +11,7 @@ A fully featured Trouble in Terrorist Town gamemode, rebuilt for Counter-Strike 
 
 [![Release](https://img.shields.io/badge/Release-mediumseagreen?style=for-the-badge&logo=onlyoffice)](https://github.com/your-org/TTT/releases/)
 [![Stable](https://img.shields.io/badge/Stable-orangered?style=for-the-badge&logo=onlyoffice)](https://github.com/your-org/TTT/releases/)
-[![Dev](https://img.shields.io/badge/Nightly-slateblue?style=for-the-badge&logo=onlyoffice)](https://nightly.link/shookeagle/TroubleInTerroristTown/workflows/nightly/dev/TTT-nightly)
+[![Dev](https://img.shields.io/badge/Nightly-slateblue?style=for-the-badge&logo=onlyoffice)](https://nightly.link/ShookEagle/TroubleInTerroristTown/workflows/nightly/dev/TTT-nightly)
 
 **Release** builds are formal and tested versions.
 
