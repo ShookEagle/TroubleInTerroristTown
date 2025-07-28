@@ -1,10 +1,5 @@
 using System.Drawing;
 using CounterStrikeSharp.API.Core;
-using TTT.Public.Generic;
-using TTT.Public.Mod.Roles;
-using TTT.Roles;
-using TTT.Roles.Roles;
-
 namespace TTT.Public.Extensions;
 
 public static class PlayerExtensions {
@@ -19,11 +14,6 @@ public static class PlayerExtensions {
     if (player.IsHLTV) return false;
 
     return true;
-  }
-  
-  public static BaseRole GetRole(this CCSPlayerController player, IPlayerState<RoleState> state, IRoleFactory factory) {
-    var roleState = state.Get(player);
-    return factory.Get(roleState.Type);
   }
   
   public static void SetColor(this CCSPlayerController player, Color color) {
