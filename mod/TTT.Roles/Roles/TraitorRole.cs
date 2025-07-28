@@ -25,7 +25,7 @@ public class TraitorRole : BaseRole {
   public override RoleType Type => RoleType.TRAITOR;
   
   public virtual IRoleLocale Locale
-    => new RoleLocale($"{ChatColors.Red}Innocent",
+    => new RoleLocale($"{ChatColors.Red}Traitor",
       "Eliminate the innocents without being caught.");
   
   public override void OnAssigned(CCSPlayerController player) {
@@ -37,4 +37,12 @@ public class TraitorRole : BaseRole {
   
   public override int PlayerRatio => CV_TRAITOR_RATIO.Value;
   public override int MaxCount => CV_TRAITOR_MAX.Value;
+
+  public override bool WinCondition(int totalAlive,
+    Dictionary<RoleType, int> roleCounts) {
+    // Traitors win when all innocents + detectives are dead
+    var innocent  = roleCounts.GetValueOrDefault(RoleType.INNOCENT);
+    var detective = roleCounts.GetValueOrDefault(RoleType.DETECTIVE);
+    return innocent + detective == 0;
+  }
 }

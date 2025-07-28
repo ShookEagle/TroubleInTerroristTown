@@ -1,4 +1,6 @@
+using System.Drawing;
 using CounterStrikeSharp.API.Core;
+using TTT.Public.Extensions;
 using TTT.Public.Mod.Roles.Enum;
 
 namespace TTT.Public.Mod.Roles;
@@ -26,4 +28,18 @@ public abstract class BaseRole {
   ///   Fired when the Role is assigned into the start of the round.
   /// </summary>
   public virtual void OnAssigned(CCSPlayerController player) { }
+
+  /// <summary>
+  ///   Called when a round ends to allow cleanup
+  /// </summary>
+  public virtual void OnRoundEnd(CCSPlayerController player) {
+    player.SetColor(Color.FromArgb(255, 255, 255, 255));
+  }
+
+  /// <summary>
+  ///   Called to determine if this role's team has won
+  /// </summary>
+  public virtual bool WinCondition(int totalAlive,
+    Dictionary<RoleType, int> roleCounts)
+    => false;
 }

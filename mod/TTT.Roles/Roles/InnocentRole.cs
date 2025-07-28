@@ -35,4 +35,11 @@ public class InnocentRole : BaseRole {
   
   public override int PlayerRatio => CV_INNOCENT_RATIO.Value;
   public override int MaxCount => CV_INNOCENT_MAX.Value;
+
+  public override bool WinCondition(int totalAlive,
+    Dictionary<RoleType, int> roleCounts) {
+    // Innocents win when no traitors are left
+    return !roleCounts.TryGetValue(RoleType.TRAITOR, out var traitors)
+      || traitors == 0;
+  }
 }

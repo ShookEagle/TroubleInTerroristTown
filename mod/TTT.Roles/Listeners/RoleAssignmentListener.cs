@@ -1,5 +1,7 @@
+using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
+using CounterStrikeSharp.API.Modules.Entities;
 using TTT.Public.Behaviors;
 using TTT.Public.Generic;
 using TTT.Public.Mod.Roles;

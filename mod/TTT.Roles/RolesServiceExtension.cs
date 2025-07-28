@@ -9,5 +9,7 @@ public static class RolesServiceExtension {
   public static void AddTTTRoles(this IServiceCollection serviceCollection) {
     serviceCollection.AddPluginBehavior<IRoleProvider, RoleProvider>();
     serviceCollection.AddPluginBehavior<RoleAssignmentListener>();
+    serviceCollection.AddPluginBehavior<RoundEndListener>();
+    serviceCollection.AddPluginBehavior<WinConditionListener>();
   }
 }
