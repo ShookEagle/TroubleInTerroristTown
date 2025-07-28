@@ -10,11 +10,14 @@ A fully featured Trouble in Terrorist Town gamemode, rebuilt for Counter-Strike 
 ## Downloads
 
 [![Release](https://img.shields.io/badge/Release-mediumseagreen?style=for-the-badge&logo=onlyoffice)](https://github.com/your-org/TTT/releases/)
-⠀⠀
 [![Stable](https://img.shields.io/badge/Stable-orangered?style=for-the-badge&logo=onlyoffice)](https://github.com/your-org/TTT/releases/)
+[![Dev](https://img.shields.io/badge/Nightly-slateblue?style=for-the-badge&logo=onlyoffice)](https://nightly.link/shookeagle/TroubleInTerroristTown/workflows/nightly/dev/TTT-nightly)
 
 **Release** builds are formal and tested versions.
+
 **Stable** builds are what we run on our own production servers and may include early features.
+
+**Nightly** builds are used exclusively for development and staging, and are likely to have problems.
 
 ---
 
@@ -82,6 +85,14 @@ foreach (IPluginBehavior extension in _extensions)
     extension.Start(this);
 }
 ```
+
+## Building
+
+The TTT plugin automatically builds to `build/TTT` when
+using `dotnet publish src/TTT/TTT.csproj`.
+Please use [SDK 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) or higher.
+
+Note that only the `src/TTT` project is intended to be built directly.
 
 ## Using
 
