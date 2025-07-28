@@ -8,7 +8,7 @@ using TTT.Public.Mod.Roles;
 
 namespace TTT.English.Roles;
 
-public class RoleLocale(string name, char roleColor, params string[] description) : IRoleLocale {
+public class RoleLocale(string name, params string[] description) : IRoleLocale {
   public string Name => name;
   public string[] Description => description;
   
@@ -20,7 +20,7 @@ public class RoleLocale(string name, char roleColor, params string[] description
   public IView TellRole() {
     var result = new SimpleView {
       PREFIX,
-      { "You are a" + (Name[0].IsVowel() ? "n" : ""), roleColor, Name, "\n" }
+      { "You are a" + (Name[0].IsVowel() ? "n" : ""), Name, "\n" }
     };
     
     if (description.Length == 0) return result;

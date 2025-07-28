@@ -4,6 +4,7 @@ using TTT.Generic.PlayerState;
 using TTT.Generic.PlayerState.Behaviors;
 using TTT.Public.Extensions;
 using TTT.Public.Generic;
+using TTT.Roles;
 
 namespace TTT.Generic;
 
@@ -15,6 +16,9 @@ public static class GenericServiceExtension {
     serviceCollection.AddPluginBehavior<RoundStateTracker>();
 
     serviceCollection.AddTransient<IPlayerStateFactory, PlayerStateFactory>();
+    
+    serviceCollection.AddSingleton<IPlayerState<RoleState>>(provider =>
+      provider.GetRequiredService<IPlayerStateFactory>().Round<RoleState>());
 
     serviceCollection.AddPluginBehavior<ICoroutines, CoroutineManager>();
   }

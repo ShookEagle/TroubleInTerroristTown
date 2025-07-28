@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\mod\TTT.Roles\TTT.Roles.csproj" />
       <ProjectReference Include="..\..\public\TTT.Public\TTT.Public.csproj" />
     </ItemGroup>
 

@@ -25,7 +25,7 @@ public class TraitorRole : BaseRole {
   public override RoleType Type => RoleType.TRAITOR;
   
   public virtual IRoleLocale Locale
-    => new RoleLocale("Innocent", ChatColors.Red,
+    => new RoleLocale($"{ChatColors.Red}Innocent",
       "Eliminate the innocents without being caught.");
   
   public override void OnAssigned(CCSPlayerController player) {

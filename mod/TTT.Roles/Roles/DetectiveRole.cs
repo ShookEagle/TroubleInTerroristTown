@@ -26,7 +26,7 @@ public class DetectiveRole : BaseRole {
   public override RoleType Type => RoleType.DETECTIVE;
   
   public virtual IRoleLocale Locale
-    => new RoleLocale("Detective", ChatColors.Blue,
+    => new RoleLocale($"{ChatColors.Blue}Detective", 
       "Find the traitors and protect the innocents.");
   
   public override string OnScreenGraphic => "path/to/detective/";
