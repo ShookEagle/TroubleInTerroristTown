@@ -12,10 +12,10 @@ namespace TTT.Roles.Listeners;
 
 public class WinConditionListener(IRoleProvider roleProvider)
   : IPluginBehavior {
-  [GameEventHandler]
+  [GameEventHandler(HookMode.Pre)]
   public HookResult OnKill(EventPlayerDeath @event, GameEventInfo info) {
     info.DontBroadcast = true;
-    checkRoundWin();
+    Server.NextFrame(checkRoundWin);
 
     return HookResult.Continue;
   }
@@ -31,7 +31,11 @@ public class WinConditionListener(IRoleProvider roleProvider)
       roleCounts[role] = roleCounts.GetValueOrDefault(role) + 1;
     }
     
-    Server.PrintToChatAll($"T:{roleCounts[RoleType.TRAITOR]} | T:{roleCounts[RoleType.INNOCENT]} | T:{roleCounts[RoleType.DETECTIVE]}");
+    Server.PrintToChatAll(
+      $"T:{roleCounts.GetValueOrDefault(RoleType.TRAITOR)} | " +
+      $"I:{roleCounts.GetValueOrDefault(RoleType.INNOCENT)} | " +
+      $"D:{roleCounts.GetValueOrDefault(RoleType.DETECTIVE)}"
+    );
 
     foreach (var role in Enum.GetValues<RoleType>()) {
       var roleImpl = roleProvider.Get(role);
