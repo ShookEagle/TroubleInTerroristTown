@@ -67,6 +67,7 @@
     </ItemGroup>
 
     <Target Name="ZipOutputPath" AfterTargets="Publish">
+        <Message Text="!!!!!!!! Zipping plugin to $(PublishBaseDirectory)\TTT.zip" Importance="high" />
         <ZipDirectory Overwrite="true" SourceDirectory="$(PublishDir)\" DestinationFile="$(PublishBaseDirectory)\TTT.zip"/>
     </Target>
 
