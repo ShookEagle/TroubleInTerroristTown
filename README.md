@@ -14,8 +14,10 @@ A fully featured Trouble in Terrorist Town gamemode, rebuilt for Counter-Strike 
 [![Dev](https://img.shields.io/badge/Nightly-slateblue?style=for-the-badge&logo=onlyoffice)](https://nightly.link/shookeagle/TroubleInTerroristTown/workflows/nightly/dev/TTT-nightly)
 
 **Release** builds are formal and tested versions.
+
 **Stable** builds are what we run on our own production servers and may include early features.
-Our **Nightly** builds are used exclusively for development and staging, and are likely to have problems.
+
+**Nightly** builds are used exclusively for development and staging, and are likely to have problems.
 
 ---
 
