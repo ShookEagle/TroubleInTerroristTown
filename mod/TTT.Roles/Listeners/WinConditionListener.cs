@@ -15,13 +15,15 @@ public class WinConditionListener(IRoleProvider roleProvider)
   [GameEventHandler(HookMode.Pre)]
   public HookResult OnKill(EventPlayerDeath @event, GameEventInfo info) {
     info.DontBroadcast = true;
-    Server.NextFrame(checkRoundWin);
+    var player = @event.Userid;
+    if (player == null) return HookResult.Continue;
+    Server.NextWorldUpdate(() => checkRoundWin(player));
 
     return HookResult.Continue;
   }
   
       
-  private void checkRoundWin() {
+  private void checkRoundWin(CCSPlayerController justDied) {
     var alivePlayers = PlayerUtil.GetAlive().ToList();
     var totalAlive   = alivePlayers.Count;
 
@@ -30,6 +32,8 @@ public class WinConditionListener(IRoleProvider roleProvider)
       alivePlayers.Select(roleProvider.GetRole)) {
       roleCounts[role] = roleCounts.GetValueOrDefault(role) + 1;
     }
+    
+    roleCounts[roleProvider.GetRole(justDied)]--;
     
     Server.PrintToChatAll(
       $"T:{roleCounts.GetValueOrDefault(RoleType.TRAITOR)} | " +
