@@ -43,5 +43,12 @@ public class RoleAssignmentListener(IRoleFactory roleFactory,
         assigned.Add(player);
       }
     }
+    
+    var defaultRole = roleFactory.Get(RoleType.INNOCENT);
+    foreach (var player in shuffled.Except(assigned)) {
+      roleState.Get(player).Type = defaultRole.Type;
+      defaultRole.OnAssigned(player);
+      assigned.Add(player);
+    }
   }
 }

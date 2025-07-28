@@ -19,7 +19,7 @@ public class RoleLocale(string name, char roleColor, params string[] description
   
   public IView TellRole() {
     var result = new SimpleView {
-      PREFIX, { "You are a" + (Name[0].IsVowel() ? "n" : ""), Name, "day!" }
+      PREFIX, { "You are a" + (Name[0].IsVowel() ? "n" : ""), Name}
     };
     
     if (description.Length == 0) return result;
