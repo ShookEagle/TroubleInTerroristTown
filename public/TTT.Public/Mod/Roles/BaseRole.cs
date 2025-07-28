@@ -1,14 +1,10 @@
 using CounterStrikeSharp.API.Core;
 using TTT.Public.Mod.Roles;
-using TTT.Formatting.Views.Roles;
-using TTT.English.Roles;
-using TTT.Formatting.Extensions;
 
 namespace TTT.Roles.Roles;
 
-public abstract class BaseRole : IRoleMessageProvider {
+public abstract class BaseRole {
   public abstract RoleType Type { get; }
-  public abstract IRoleLocale Locale { get; }
   public abstract string OnScreenGraphic { get; }
   public virtual string OverheadIcon => string.Empty;
 
@@ -27,7 +23,5 @@ public abstract class BaseRole : IRoleMessageProvider {
   /// <summary>
   ///   Fired when the Role is assigned into the start of the round.
   /// </summary>
-  public virtual void OnAssigned(CCSPlayerController player) {
-    Locale.TellRole().ToChat(player);
-  }
+  public virtual void OnAssigned(CCSPlayerController player) { }
 }

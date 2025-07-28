@@ -4,6 +4,7 @@ using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Cvars;
 using CounterStrikeSharp.API.Modules.Utils;
 using TTT.English.Roles;
+using TTT.Formatting.Extensions;
 using TTT.Formatting.Views.Roles;
 using TTT.Public.Extensions;
 using TTT.Public.Mod.Roles;
@@ -23,7 +24,7 @@ public class DetectiveRole : BaseRole {
   
   public override RoleType Type => RoleType.DETECTIVE;
   
-  public override IRoleLocale Locale
+  public virtual IRoleLocale Locale
     => new RoleLocale("Detective", ChatColors.Blue,
       "Find the traitors and protect the innocents.");
   
@@ -36,6 +37,7 @@ public class DetectiveRole : BaseRole {
   public override void OnAssigned(CCSPlayerController player) {
     player.SetColor(Color.Blue);
     player.SwitchTeam(CsTeam.CounterTerrorist);
+    Locale.TellRole().ToChat(player);
     base.OnAssigned(player);
   }
 }

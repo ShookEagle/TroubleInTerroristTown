@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <PackageReference Include="CounterStrikeSharp.API" Version="1.0.328" />
-      <ProjectReference Include="../../mod/TTT.Roles/TTT.Roles.csproj"/>
     </ItemGroup>
 
 </Project>

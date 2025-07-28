@@ -1,7 +1,9 @@
 using CounterStrikeSharp.API;
+using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Cvars;
 using CounterStrikeSharp.API.Modules.Utils;
 using TTT.English.Roles;
+using TTT.Formatting.Extensions;
 using TTT.Formatting.Views.Roles;
 using TTT.Public.Mod.Roles;
 using TTT.Validator;
@@ -20,9 +22,13 @@ public class InnocentRole : BaseRole {
   
   public override RoleType Type => RoleType.INNOCENT;
 
-  public override IRoleLocale Locale
+  public virtual IRoleLocale Locale
     => new RoleLocale("Innocent", ChatColors.Green,
       "Survive and find the traitors before they kill all the players.");
+  
+  public override void OnAssigned(CCSPlayerController player) {
+    Locale.TellRole().ToChat(player);
+  }
   
   public override string OnScreenGraphic => "path/to/innocent/";
   
