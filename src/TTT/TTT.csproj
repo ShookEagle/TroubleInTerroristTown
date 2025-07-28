@@ -8,6 +8,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\lang\TTT.English\TTT.English.csproj" />
+      <ProjectReference Include="..\..\mod\TTT.Logs\TTT.Logs.csproj" />
+      <ProjectReference Include="..\..\mod\TTT.Roles\TTT.Roles.csproj" />
       <ProjectReference Include="..\..\public\TTT.Formatting\TTT.Formatting.csproj" />
       <ProjectReference Include="..\..\public\TTT.Public\TTT.Public.csproj" />
     </ItemGroup>
