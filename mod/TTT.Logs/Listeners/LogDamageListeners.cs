@@ -1,15 +1,15 @@
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
-using TTT.Formatting.Views.Logs;
 using TTT.Public.Behaviors;
 using TTT.Public.Extensions;
+using TTT.Public.Mod.Logs;
 
 namespace TTT.Logs.Listeners;
 
 public class LogDamageListeners : IPluginBehavior {
-  private readonly IRichLogService logs;
+  private readonly ILogService logs;
 
-  public LogDamageListeners(IRichLogService logs) { this.logs = logs; }
+  public LogDamageListeners(ILogService logs) { this.logs = logs; }
 
   [GameEventHandler]
   public HookResult OnGrenadeThrown(EventGrenadeThrown @event,

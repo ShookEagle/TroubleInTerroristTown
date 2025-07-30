@@ -8,5 +8,5 @@ public interface IPlayerTag {
   /// </summary>
   /// <param name="playerController"></param>
   /// <returns></returns>
-  string Plain(CCSPlayerController playerController);
+  string Tag(CCSPlayerController playerController);
 }

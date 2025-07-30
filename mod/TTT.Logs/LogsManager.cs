@@ -1,63 +1,71 @@
+using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
-using TTT.Formatting.Base;
-using TTT.Formatting.Core;
-using TTT.Formatting.Extensions;
-using TTT.Formatting.Objects;
-using TTT.Formatting.Views.Logs;
 using TTT.Public.Behaviors;
 using TTT.Public.Extensions;
+using TTT.Public.Generic;
+using TTT.Public.Mod.Logs;
+using TTT.Public.Utils;
 
 namespace TTT.Logs;
 
-public class LogsManager(ILogLocale locale, IRichPlayerTag richPlayerTag)
-  : IPluginBehavior, IRichLogService {
-  private readonly List<IView> logMessages = [];
+public class LogsManager(ILocalizationHandler localizer, IPlayerTag playerTag)
+  : IPluginBehavior, ILogService {
+  private readonly List<string> logMessages = [];
   
-  public void Append(string message) {
-    logMessages.Add(locale.CreateLog(message));
+  public void Append(string key, params object[] args) {
+    logMessages.Add($"{time()} {localizer.Get(key, args)}");
   }
 
   public IEnumerable<string> GetMessages() {
-    return logMessages.SelectMany(view => view.ToWriter().Plain);
+    return logMessages;
   }
 
   public void Clear() { logMessages.Clear(); }
 
   public void PrintLogs(CCSPlayerController? player) {
     if (player == null || !player.IsReal()) {
-      locale.BeginTTTLogs.ToServerConsole();
-      foreach (var log in logMessages) log.ToServerConsole();
-      locale.EndTTTLogs.ToServerConsole();
+      Server.PrintToConsole(localizer.Get("logs.begin"));
+      foreach (var log in logMessages) Server.PrintToConsole(log);
+      Server.PrintToConsole(localizer.Get("logs.end"));
       return;
     }
 
 
-    locale.BeginTTTLogs.ToConsole(player);
-    foreach (var log in logMessages) log.ToConsole(player);
-    locale.EndTTTLogs.ToConsole(player);
+    player.PrintLocalized(localizer, "logs.begin");
+    foreach (var log in logMessages) player.PrintToChat(log);
+    player.PrintLocalized(localizer, "logs.end");
   }
 
-  public void Append(params FormatObject[] objects) {
-    logMessages.Add(locale.CreateLog(objects));
+  public void Append(Dictionary<string, object[]> objects) {
+    foreach (var (key, args) in objects)
+      logMessages.Add($"{time()} {localizer.Get(key, args)}");
   }
 
-  public FormatObject Player(CCSPlayerController playerController) {
-    return new TreeFormatObject {
-      playerController,
-      $"[{playerController.UserId}]",
-      richPlayerTag.Rich(playerController)
-    };
+  public string Player(CCSPlayerController playerController) {
+    return $"[{playerController.UserId}] {playerTag.Tag(playerController)}";
+  }
+  
+  private string time() {
+    var elapsed = RoundUtil.GetTimeElapsed();
+
+    var minutes = Math.Floor(elapsed / 60f).ToString("00");
+    var seconds = (elapsed % 60).ToString("00");
+
+    return $"[{minutes}:{seconds}]";
   }
 
   [GameEventHandler]
   public HookResult OnRoundEnd(EventRoundEnd @event, GameEventInfo info) {
-    locale.BeginTTTLogs.ToServerConsole().ToAllConsole();
+    foreach (var player in Utilities.GetPlayers()) {
+      player.PrintLocalized(localizer, "logs.begin");
+      foreach (var log in logMessages) player.PrintToChat(log);
+      player.PrintLocalized(localizer, "logs.end");
+    }
 
-    //  By default, print all logs to player consoles at the end of the round.
-    foreach (var log in logMessages) log.ToServerConsole().ToAllConsole();
-
-    locale.EndTTTLogs.ToServerConsole().ToAllConsole();
+    Server.PrintToConsole(localizer.Get("logs.begin"));
+    foreach (var log in logMessages) Server.PrintToConsole(log);
+    Server.PrintToConsole(localizer.Get("logs.end"));
     return HookResult.Continue;
   }
 
