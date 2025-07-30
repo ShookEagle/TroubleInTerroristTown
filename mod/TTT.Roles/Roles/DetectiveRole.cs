@@ -3,17 +3,16 @@ using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Cvars;
 using CounterStrikeSharp.API.Modules.Utils;
-using TTT.English.Roles;
-using TTT.Formatting.Extensions;
-using TTT.Formatting.Views.Roles;
 using TTT.Public.Extensions;
+using TTT.Public.Generic;
 using TTT.Public.Mod.Roles;
 using TTT.Public.Mod.Roles.Enum;
 using TTT.Validator;
 
 namespace TTT.Roles.Roles;
 
-public class DetectiveRole : BaseRole {
+public class DetectiveRole(ILocalizationHandler localizer)
+  : BaseRole(localizer) {
   public static readonly FakeConVar<int> CV_DETECTIVE_RATIO = new(
     "ttt_role_detective_ratio", "How many players per 1 traitor", 8,
     ConVarFlags.FCVAR_NONE, new NonZeroRangeValidator<int>(-1, 64));
@@ -25,10 +24,6 @@ public class DetectiveRole : BaseRole {
   
   public override RoleType Type => RoleType.DETECTIVE;
   
-  public virtual IRoleLocale Locale
-    => new RoleLocale($"{ChatColors.Blue}Detective", 
-      "Find the traitors and protect the innocents.");
-  
   public override string OnScreenGraphic => "path/to/detective/";
   public override string OverheadIcon => "path/to/detective/";
   
@@ -38,7 +33,10 @@ public class DetectiveRole : BaseRole {
   public override void OnAssigned(CCSPlayerController player) {
     player.SetColor(Color.Blue);
     player.SwitchTeam(CsTeam.CounterTerrorist);
-    Locale.TellRole().ToChat(player);
+    var role = Localizer.Get("role.detective_name");
+    player.PrintLocalizedPrefixed(Localizer, "role.declare",
+      role[0].IsVowel() ? "n" : "", role);
+    player.PrintLocalizedPrefixed(Localizer, "role.detective_objective");
     base.OnAssigned(player);
   }
 }

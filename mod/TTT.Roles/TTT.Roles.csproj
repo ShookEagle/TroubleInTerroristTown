@@ -9,8 +9,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\public\TTT.Public\TTT.Public.csproj" />
       <ProjectReference Include="..\..\public\TTT.Validator\TTT.Validator.csproj" />
-      <ProjectReference Include="..\..\public\TTT.Formatting\TTT.Formatting.csproj" />
-      <ProjectReference Include="..\..\lang\TTT.English\TTT.English.csproj" />
     </ItemGroup>
 
 </Project>

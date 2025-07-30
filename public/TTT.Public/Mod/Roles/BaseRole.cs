@@ -1,11 +1,13 @@
 using System.Drawing;
 using CounterStrikeSharp.API.Core;
 using TTT.Public.Extensions;
+using TTT.Public.Generic;
 using TTT.Public.Mod.Roles.Enum;
 
 namespace TTT.Public.Mod.Roles;
 
-public abstract class BaseRole {
+public abstract class BaseRole(ILocalizationHandler localizer) {
+  protected readonly ILocalizationHandler Localizer = localizer;
   public abstract RoleType Type { get; }
   public abstract string OnScreenGraphic { get; }
   public virtual string OverheadIcon => string.Empty;

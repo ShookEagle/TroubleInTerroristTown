@@ -7,21 +7,21 @@ using TTT.Roles.Roles;
 
 namespace TTT.Roles;
 
-public class RoleProvider(IPlayerStateFactory factory)
-  : IPluginBehavior, IRoleProvider {
+public class RoleProvider(IPlayerStateFactory factory,
+  ILocalizationHandler localizer) : IPluginBehavior, IRoleProvider {
   private readonly IPlayerState<RoleState> rState =
     factory.Round<RoleState>();
   
-  private static readonly BaseRole INNOCENT = new InnocentRole();
-  private static readonly BaseRole DETECTIVE = new DetectiveRole();
-  private static readonly BaseRole TRAITOR = new TraitorRole();
+  private readonly BaseRole innocent = new InnocentRole(localizer);
+  private readonly BaseRole detective = new DetectiveRole(localizer);
+  private readonly BaseRole traitor = new TraitorRole(localizer);
   
   public BaseRole Get(RoleType type) {
     return type switch {
-      RoleType.INNOCENT  => INNOCENT,
-      RoleType.DETECTIVE => DETECTIVE,
-      RoleType.TRAITOR   => TRAITOR,
-      _                  => INNOCENT,
+      RoleType.INNOCENT  => innocent,
+      RoleType.DETECTIVE => detective,
+      RoleType.TRAITOR   => traitor,
+      _                  => innocent,
     };
   }
 

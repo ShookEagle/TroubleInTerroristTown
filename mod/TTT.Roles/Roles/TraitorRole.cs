@@ -1,18 +1,16 @@
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Cvars;
-using CounterStrikeSharp.API.Modules.Cvars.Validators;
-using CounterStrikeSharp.API.Modules.Utils;
-using TTT.English.Roles;
-using TTT.Formatting.Extensions;
-using TTT.Formatting.Views.Roles;
+using TTT.Public.Extensions;
+using TTT.Public.Generic;
 using TTT.Public.Mod.Roles;
 using TTT.Public.Mod.Roles.Enum;
 using TTT.Validator;
 
 namespace TTT.Roles.Roles;
 
-public class TraitorRole : BaseRole {
+public class TraitorRole(ILocalizationHandler localizer)
+: BaseRole(localizer) {
   public static readonly FakeConVar<int> CV_TRAITOR_RATIO = new(
     "ttt_role_traitor_ratio", "How many players per 1 traitor", 3,
     ConVarFlags.FCVAR_NONE, new NonZeroRangeValidator<int>(-1, 64));
@@ -24,12 +22,11 @@ public class TraitorRole : BaseRole {
   
   public override RoleType Type => RoleType.TRAITOR;
   
-  public virtual IRoleLocale Locale
-    => new RoleLocale($"{ChatColors.Red}Traitor",
-      "Eliminate the innocents without being caught.");
-  
   public override void OnAssigned(CCSPlayerController player) {
-    Locale.TellRole().ToChat(player);
+    var role = Localizer.Get("role.traitor_name");
+    player.PrintLocalizedPrefixed(Localizer, "role.declare",
+      role[0].IsVowel() ? "n" : "", role);
+    player.PrintLocalizedPrefixed(Localizer, "role.traitor_objective");
   }
   
   public override string OnScreenGraphic => "path/to/traitor/";

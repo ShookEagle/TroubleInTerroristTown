@@ -1,0 +1,13 @@
+{
+  "player_not_found": "No player found matching '{0}'",
+  "role_prefix": "{darkblue}Role>{default}",
+  "shop_prefix": "{darkblue}Shop>{default}",
+  "karma_prefix": "{darkblue}Karma>{default}",
+  "role.innocent_name": "{green}Innocent",
+  "role.innocent_objective": "Survive and find the traitors before they kill all the players.",
+  "role.detective_name": "{blue}Detective",
+  "role.detective_objective": "Find the traitors and protect the innocents.",
+  "role.traitor_name": "{red}Traitor",
+  "role.traitor_objective": "Eliminate the innocents without being caught.",
+  "role.declare": "You are a{0} {1}{default}."
+}

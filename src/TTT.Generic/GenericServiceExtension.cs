@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using TTT.Generic.Coroutines;
+using TTT.Generic.Localization;
 using TTT.Generic.PlayerState;
 using TTT.Generic.PlayerState.Behaviors;
 using TTT.Public.Extensions;
